@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Line KPI
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<!-- <ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+    <ion-card *ngFor="let subStage of subStages">
+      <ion-card-header>
+        <ion-card-subtitle>{{subStage.subStageName}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <app-machine [machineInput]="machine" *ngFor="let machine of subStage.machineList"></app-machine>
+      </ion-card-content>
+    </ion-card>
+  </ion-refresher>
+</ion-content> -->
+
+
+<ion-content padding>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+        <ion-icon size="large" name="ios-arrow-dropleft">82%</ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start" style="margin:0px 75px 0px 0px;width: 465%;">
+        <h5>Overall Line Efficiency is 82%</h5>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-item>
+    <ion-label>Worker Shift</ion-label>
+    <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select Shift">
+      <ion-select-option value="general">General</ion-select-option>
+      <ion-select-option value="afternoon">Afternoon</ion-select-option>
+      <ion-select-option value="evening">Evening</ion-select-option>
+      <ion-select-option value="night">Night</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-card *ngFor="let subStage of subStages">
+    <ion-card-header style="background: lightgreen;">
+      <span [ngClass]="{
+        'circle-completed': subStage.subStageEfficiency <= 100 && subStage.subStageEfficiency > 81,
+        'circle-inProgress': subStage.subStageEfficiency <= 80 && subStage.subStageEfficiency > 51,
+        'circle-bottleNeck': subStage.subStageEfficiency <= 50 && subStage.subStageEfficiency > 0
+    }">Efficiency:
+        {{subStage.subStageEfficiency}}%</span>
+      <ion-card-subtitle>{{subStage.subStageName}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content style="background: honeydew;">
+      <app-machine [machineInput]="machine" *ngFor="let machine of subStage.machineList"></app-machine>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

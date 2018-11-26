@@ -1,0 +1,29 @@
+.circle-completed{
+
+    color: green;
+    position: absolute;top: 5px;right: 5px;
+}
+
+.circle-inProgress{
+    color: yellow;
+    position: absolute;top: 5px;right: 5px;
+}
+
+
+.circle-bottleNeck{
+    color: red;;
+    position: absolute;top: 5px;right: 5px;
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  h5{
+    background: lightgreen;
+    padding: 5px;
+    color: #7171fd;
+  }

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Reports
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- <div>
+    <ngx-datatable
+      [rows]="rows"
+      [columns]="columns">
+    </ngx-datatable>
+  </div> -->
+
+
+
+  <ngx-datatable class="material" [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'"
+    [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [reorderable]="reorderable">
+
+    <ngx-datatable-column name="Name"></ngx-datatable-column>
+    <ngx-datatable-column name="Efficiency"></ngx-datatable-column>
+
+    <ngx-datatable-column name="Action">
+      <ng-template #actionCell let-row="row" let-value="value" ngx-datatable-cell-template>
+        <ion-button *ngIf="value === 'Assign Training'" expand="full" shape="round" color="primary" (click)="assignTraining(row)">
+          <ion-icon name="construct"></ion-icon>
+        </ion-button>
+      </ng-template>
+
+    </ngx-datatable-column>
+
+
+  </ngx-datatable>
+
+</ion-content>

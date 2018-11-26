@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-card>
+    <ion-img src="/assets/factory.jpg"></ion-img>
+    <ion-card-header>
+        <ion-card-title>Site Name</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        <p>Site Information</p>
+    </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-button style="margin-left:5%;width:90%" [routerLink]="['/LineKPI']" router-direction="forward" expand="full" shape="round" color="primary" (click)="presentLoadingWithOptions()"> Line KPI <span style="color: aqua;"><ion-icon size="small" name="arrow-round-forward"></ion-icon></span></ion-button>
+  <ion-card style="text-align: center;">
+    <ion-card-header color="success" style="padding: 5px;" translucent="false">
+        <ion-card-subtitle>Production KPI</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            Efficiency
+          </ion-col>
+          <div style="border: 1px solid;height: auto;"></div>
+          <ion-col>
+            Productivity
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+</ion-card>
+</ion-card>
+</ion-content>

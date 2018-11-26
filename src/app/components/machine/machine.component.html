@@ -1,0 +1,30 @@
+<ion-grid>
+
+  <ion-row style="margin-top: 1%">
+    <ion-col>
+      {{machineInput.machineName}}
+    </ion-col>
+    <div [ngClass]="{
+        'circle-completed': machineInput.machineStatus === 'Completed',
+        'circle-default': machineInput.machineStatus === 'Not-Started',
+        'circle-inProgress': machineInput.machineStatus === 'In-Progress',
+        'circle-bottleNeck': machineInput.machineStatus === 'bottleNeck'
+    }"
+      (click)="openEfficiencyDialog(machineInput.machineName,machineInput.machineEfficiency,machineInput.machineStatus)"></div>
+    <ion-col>
+      <app-worker [workerInput]="worker" class="workerContainer" *ngFor="let worker of machineInput.workerList"></app-worker>
+    </ion-col>
+    <!-- <ion-col>
+    </ion-col> -->
+  </ion-row>
+
+  <ion-row style="margin-top: -6%">
+    <ion-col>
+    </ion-col>
+    <div style="border: 1px solid;height: 50px;margin-left: 1%;"></div>
+    <ion-col>
+    </ion-col>
+    <!-- <ion-col>
+    </ion-col> -->
+  </ion-row>
+</ion-grid>
