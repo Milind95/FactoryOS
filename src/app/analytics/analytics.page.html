@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Analytics
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+
+
+
+  <ion-card>
+    <ion-card-header style="background: lightgreen;">
+      <ion-card-subtitle>Machine Line Chart</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content style="background: honeydew;">
+      <div style="display: block;">
+        <canvas baseChart width="300" height="300" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+          [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartLineHovered($event)"
+          (chartClick)="chartLineClicked($event)">
+        </canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header style="background: lightgreen;">
+      <ion-card-subtitle>Machine Bar Chart</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content style="background: honeydew;">
+      <div style="display: block">
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+          [chartType]="barChartType" (chartHover)="chartBarHovered($event)" (chartClick)="chartBarClicked($event)"></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-card-header style="background: lightgreen;">
+      <ion-card-subtitle>Machine Bar Chart</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content style="background: honeydew;">
+      <div style="display: block">
+      <canvas baseChart
+                  [data]="doughnutChartData"
+                  [labels]="doughnutChartLabels"
+                  [chartType]="doughnutChartType"
+                  (chartHover)="chartDoughnutHovered($event)"
+                  (chartClick)="chartDoughnutClicked($event)"></canvas>
+    </div>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>

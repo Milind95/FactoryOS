@@ -19,6 +19,11 @@ export class AppComponent {
       title: 'Report',
       url: '/report',
       icon: 'document'
+    },
+    {
+      title: 'Analytics',
+      url: '/analytics',
+      icon: 'podium'
     }
   ];
 

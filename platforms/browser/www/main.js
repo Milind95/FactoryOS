@@ -1602,7 +1602,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var routes = [
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'map',
         pathMatch: 'full'
     },
     {
@@ -1699,7 +1699,7 @@ var AppComponent = /** @class */ (function () {
         var _this = this;
         this.platform.ready().then(function () {
             _this.statusBar.styleDefault();
-            _this.splashScreen.show();
+            _this.splashScreen.hide();
         });
     };
     AppComponent = __decorate([

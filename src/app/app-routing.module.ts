@@ -17,7 +17,11 @@ const routes: Routes = [
   },
   { path: 'LineKPI', loadChildren: './line-kpi/line-kpi.module#LineKPIPageModule' },
   { path: 'map', loadChildren: './map/map.module#MapPageModule' },
-  { path: 'report', loadChildren: './report/report.module#ReportPageModule' }
+  { path: 'report', loadChildren: './report/report.module#ReportPageModule' },
+  { path: 'analytics', loadChildren: './analytics/analytics.module#AnalyticsPageModule' },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' }
+
 ];
 
 @NgModule({

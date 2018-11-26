@@ -62,7 +62,7 @@ var MapPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>\n      Maps\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div id=\"map_canvas\">\n\n  </div>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title> Maps </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n      <ion-searchbar\n        [(ngModel)]=\"autocomplete.input\"\n        (ionInput)=\"updateSearchResults()\"\n        placeholder=\"Search for a place\"\n      ></ion-searchbar>\n      <ion-list [hidden]=\"autocompleteItems.length == 0\">\n        <ion-item\n          *ngFor=\"let item of autocompleteItems\"\n          tappable\n          (click)=\"selectSearchResult(item)\"\n        >\n          {{ item.description }}\n        </ion-item>\n      </ion-list>\n  <ion-card style=\"height: 100%;\">\n  <div id=\"map_canvas\"></div>\n  </ion-card>\n</ion-content>\n"
 
 /***/ }),
 
@@ -88,8 +88,7 @@ module.exports = "#map_canvas {\n  height: 100%; }\n\n/*# sourceMappingURL=data:
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MapPage", function() { return MapPage; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic-native/google-maps/ngx */ "./node_modules/@ionic-native/google-maps/ngx/index.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -100,53 +99,116 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
+// import {
+//   GoogleMaps,
+//   GoogleMap,
+//   GoogleMapsEvent,
+//   GoogleMapOptions,
+//   CameraPosition,
+//   MarkerOptions,
+//   Marker,
+//   Environment
+// } from '@ionic-native/google-maps/ngx';
 
 var MapPage = /** @class */ (function () {
     function MapPage(router) {
         this.router = router;
+        this.markers = [];
+        this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
+        this.autocomplete = { input: "" };
+        this.autocompleteItems = [];
+        this.geocoder = new google.maps.Geocoder();
     }
     MapPage.prototype.ngOnInit = function () {
         this.loadMap();
     };
     MapPage.prototype.loadMap = function () {
+        var _this = this;
+        this.map = new google.maps.Map(document.getElementById("map_canvas"), {
+            center: { lat: -34.9011, lng: -56.1645 },
+            zoom: 15
+        });
+        var marker = new google.maps.Marker({
+            title: "Ionic",
+            animation: google.maps.Animation.DROP,
+            position: { lat: -34.9011, lng: -56.1645 },
+            map: this.map
+        });
+        this.markers.push(marker);
+        google.maps.event.addListener(marker, "click", function () {
+            console.log("reached here inside marker");
+            _this.router.navigate(['/home']);
+        });
         // This code is necessary for browser
         // Environment.setEnv({
         //   'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyDTnnlhDW71zaEyVichmDouZaH7p0_Of_g',
         //   'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyDTnnlhDW71zaEyVichmDouZaH7p0_Of_g'
         // });
+        // let mapOptions: GoogleMapOptions = {
+        //   camera: {
+        //      target: {
+        //        lat: 43.0741904,
+        //        lng: -89.3809802
+        //      },
+        //      zoom: 18,
+        //      tilt: 30
+        //    }
+        // };
+        // this.map = GoogleMaps.create('map_canvas', mapOptions);
+        // let marker: Marker = this.map.addMarkerSync({
+        //   title: 'Ionic',
+        //   icon: 'blue',
+        //   animation: 'DROP',
+        //   position: {
+        //     lat: 43.0741904,
+        //     lng: -89.3809802
+        //   }
+        // });
+        // marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+        //   this.router.navigate(['/home'])
+        // });
+    };
+    MapPage.prototype.updateSearchResults = function () {
         var _this = this;
-        var mapOptions = {
-            camera: {
-                target: {
-                    lat: 43.0741904,
-                    lng: -89.3809802
-                },
-                zoom: 18,
-                tilt: 30
-            }
-        };
-        this.map = _ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_1__["GoogleMaps"].create('map_canvas', mapOptions);
-        var marker = this.map.addMarkerSync({
-            title: 'Ionic',
-            icon: 'blue',
-            animation: 'DROP',
-            position: {
-                lat: 43.0741904,
-                lng: -89.3809802
-            }
+        if (this.autocomplete.input == "") {
+            this.autocompleteItems = [];
+            return;
+        }
+        this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete.input }, function (predictions, status) {
+            _this.autocompleteItems = [];
+            // this.zone.run(() => {
+            predictions.forEach(function (prediction) {
+                _this.autocompleteItems.push(prediction);
+            });
+            // });
         });
-        marker.on(_ionic_native_google_maps_ngx__WEBPACK_IMPORTED_MODULE_1__["GoogleMapsEvent"].MARKER_CLICK).subscribe(function () {
-            _this.router.navigate(['/home']);
+    };
+    MapPage.prototype.selectSearchResult = function (item) {
+        var _this = this;
+        // this.clearMarkers();
+        this.autocompleteItems = [];
+        this.geocoder.geocode({ placeId: item.place_id }, function (results, status) {
+            if (status === "OK" && results[0]) {
+                var position = {
+                    lat: results[0].geometry.location.lat,
+                    lng: results[0].geometry.location.lng
+                };
+                var marker = new google.maps.Marker({
+                    position: results[0].geometry.location,
+                    map: _this.map
+                });
+                _this.markers.push(marker);
+                _this.map.setCenter(results[0].geometry.location);
+            }
         });
     };
     MapPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-map',
+            selector: "app-map",
             template: __webpack_require__(/*! ./map.page.html */ "./src/app/map/map.page.html"),
-            styles: [__webpack_require__(/*! ./map.page.scss */ "./src/app/map/map.page.scss")],
+            styles: [__webpack_require__(/*! ./map.page.scss */ "./src/app/map/map.page.scss")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], MapPage);
     return MapPage;
 }());

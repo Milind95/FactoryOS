@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BarcodeScanner,BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-line-kpi',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./line-kpi.page.scss'],
 })
 export class LineKPIPage implements OnInit {
+  options:BarcodeScannerOptions;
   customActionSheetOptions: any = {
     header: 'Shift',
     subHeader: 'Select Shift'
@@ -109,7 +111,8 @@ export class LineKPIPage implements OnInit {
       }]
     }]
   }];
-  constructor() { }
+
+  constructor(private barcodeScanner: BarcodeScanner) { }
 
   ngOnInit() {
   }
@@ -120,5 +123,17 @@ export class LineKPIPage implements OnInit {
       console.log('Async operation has ended');
       event.target.complete();
     }, 2000);
+  }
+
+  showBarCode(){
+    this.options = {
+      prompt:'Scan a barcode to see the result'
+    }
+    
+    this.barcodeScanner.scan(this.options).then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+     }).catch(err => {
+         console.log('Error', err);
+     });
   }
 }
