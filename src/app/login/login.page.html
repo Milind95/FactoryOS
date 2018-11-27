@@ -3,7 +3,54 @@
     <ion-title>login</ion-title>
   </ion-toolbar>
 </ion-header>
+<!--class="backgroundView"-->
+<ion-content>
+ <ion-img src="/assets/finalFactory.jpg"></ion-img>
+ <ion-img src="/assets/finalFactory.jpg" style="margin-top: -4px !important"></ion-img>
+  <ion-card style="background: #e0f1dd;position: absolute;
+    bottom: 30px;
+    right: 21px;">
+    <ion-card-content>
+      <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+        <ion-row>
+          <ion-col>
+            <ion-list>
 
-<ion-content padding>
+              <ion-item>
+                <ion-label position="stacked">User Name</ion-label>
+                <ion-input placeholder="UserName" name="username" id="loginField" type="text" required [(ngModel)]="username"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">Password</ion-label>
+                <ion-input placeholder="Password" name="password" id="passwordField" type="password" required [(ngModel)]="password"></ion-input>
+              </ion-item>
+
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div *ngIf="error">{{error}}</div>
+            <ion-button expand="full" type="submit" [disabled]="!loginForm.form.valid">Login
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+
+      <ion-row>
+        <ion-col>
+          <ion-button color="primary" strong="true" size="small" fill="clear" expand="full" >Forget Password
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="secondary" strong="true" size="small" fill="clear" expand="full">Register
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+
 
 </ion-content>
