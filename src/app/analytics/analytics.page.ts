@@ -20,6 +20,11 @@ export class AnalyticsPage implements OnInit {
   childWorkerArray: Array<Object> = [];
   childMachineArray: Array<Object> = [];
 
+  machineStageTime: Array<Object> = [];
+  MachineStageTimeIdle: Array<Object> = [];
+  WorkerStageTime: Array<Object> = [];
+  WorkerStageTimeIdle: Array<Object> = [];
+
   public lineChartData: Array<any> = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
@@ -135,9 +140,7 @@ export class AnalyticsPage implements OnInit {
       this.doughnutMachineChartLabels = this.stages;
       this.doughnutMachineChartData = this.machineEfficiency;
 
-      // this.childWorkerArray = {
 
-      // }
       for (let r = 0; r < this.doughnutWorkerChartData.length; r++) {
         let object = {
           "data": [this.doughnutWorkerChartData[r], (100 - this.doughnutWorkerChartData[r])],
@@ -153,6 +156,33 @@ export class AnalyticsPage implements OnInit {
         }
         this.childMachineArray.push(object);
       }
+
+
+      this.machineStageTime = res['result'][0].Machine_stage_Time;
+      this.MachineStageTimeIdle = res['result'][0].Machine_stage_Time_Idle;
+      this.WorkerStageTime = res['result'][0].Worker_stage_Time;
+      this.WorkerStageTimeIdle = res['result'][0].Worker_stage_Time_Idle;
+
+      this.barChartLabels = this.stages;
+      console.log(this.machineStageTime);
+      console.log(this.MachineStageTimeIdle);
+      console.log(this.WorkerStageTime);
+      console.log(this.WorkerStageTimeIdle);
+
+      this.barChartData = [
+        { data: this.WorkerStageTime, label: 'Worker Time' },
+        { data: this.WorkerStageTimeIdle, label: 'Worker Idle Time' },
+        { data: this.machineStageTime, label: 'Machine Time' },
+        { data: this.MachineStageTimeIdle, label: 'Machine Idle Time' }
+      ];
+
+      // this.barChartData = [
+      //   { data: [30, 52, 23, 41], label: 'Worker Time' },
+      //   { data: [30, 52, 23, 41], label: 'Worker Idle Time' },
+      //   { data: [30, 52, 23, 41], label: 'Machine Time' },
+      //   { data: [30, 52, 23, 41], label: 'Machine Idle Time' }
+      // ];
+
 
     });
   }
@@ -187,13 +217,16 @@ export class AnalyticsPage implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+
+  public barChartLabels: string[] = ['Stage1', 'Stage2', 'Stage3'];
   public barChartType: string = 'bar';
   public barChartLegend: boolean = true;
-
   public barChartData: any[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    { data: [30, 52, 23, 41], label: 'Worker Time' },
+    { data: [30, 52, 23, 41], label: 'Worker Idle Time' },
+    { data: [30, 52, 23, 41], label: 'Machine Time' },
+    { data: [30, 52, 23, 41], label: 'Machine Idle Time' }
+
   ];
 
   // events
@@ -209,33 +242,22 @@ export class AnalyticsPage implements OnInit {
 
 
 
-
-
-
-
-
-
   // events
   public chartWorkerDoughnutClicked(e: any): void {
     this.showChildWorker = true;
-    console.log(e);
   }
 
   public chartMachineDoughnutClicked(e: any): void {
     this.showChildMachine = true;
-    console.log(e);
   }
   goBackWorker() {
-    console.log("aesgaeg");
     this.showChildWorker = false;
   }
   goBackMachine() {
-    console.log("machine");
     this.showChildMachine = false;
   }
 
   public chartDoughnutHovered(e: any): void {
-    console.log(e);
   }
 
 }
