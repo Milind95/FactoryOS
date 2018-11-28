@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
+import {MachineService} from './Services/machine.service';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -13,6 +13,7 @@ import {
   GoogleMap,
 } from '@ionic-native/google-maps/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,9 +22,11 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
+    MachineService,
     SplashScreen,
     GoogleMaps,
     BarcodeScanner,

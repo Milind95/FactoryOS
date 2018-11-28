@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ChartsModule } from 'ng2-charts';
 
 import { IonicModule } from '@ionic/angular';
-
+import * as highcharts from 'highcharts';
 import { AnalyticsPage } from './analytics.page';
 
 const routes: Routes = [
@@ -25,4 +25,4 @@ const routes: Routes = [
   ],
   declarations: [AnalyticsPage]
 })
-export class AnalyticsPageModule {}
+export class AnalyticsPageModule { }

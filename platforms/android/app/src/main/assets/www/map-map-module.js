@@ -62,7 +62,7 @@ var MapPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title> Maps </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n      <ion-searchbar\n        [(ngModel)]=\"autocomplete.input\"\n        (ionInput)=\"updateSearchResults()\"\n        placeholder=\"Search for a place\"\n      ></ion-searchbar>\n      <ion-list [hidden]=\"autocompleteItems.length == 0\">\n        <ion-item\n          *ngFor=\"let item of autocompleteItems\"\n          tappable\n          (click)=\"selectSearchResult(item)\"\n        >\n          {{ item.description }}\n        </ion-item>\n      </ion-list>\n  <ion-card style=\"height: 100%;\">\n  <div id=\"map_canvas\"></div>\n  </ion-card>\n</ion-content>\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-searchbar\r\n    [(ngModel)]=\"autocomplete.input\"\r\n    (ionInput)=\"updateSearchResults()\"\r\n    placeholder=\"Search for a place\"\r\n  ></ion-searchbar>\r\n  <ion-list [hidden]=\"autocompleteItems.length == 0\">\r\n    <ion-item\r\n      *ngFor=\"let item of autocompleteItems\"\r\n      tappable\r\n      (click)=\"selectSearchResult(item)\"\r\n    >\r\n      {{ item.description }}\r\n    </ion-item>\r\n  </ion-list>\r\n  <ion-card style=\"height: 88%;\"> <div id=\"map_canvas\"></div> </ion-card>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -73,7 +73,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#map_canvas {\n  height: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFwL0M6XFxVc2Vyc1xcYWRtaW5cXERlc2t0b3BcXHNhbXBsZUFwcC9zcmNcXGFwcFxcbWFwXFxtYXAucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBWSxFQUNmIiwiZmlsZSI6InNyYy9hcHAvbWFwL21hcC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjbWFwX2NhbnZhc3tcclxuICAgIGhlaWdodDogMTAwJTtcclxufSJdfQ== */"
+module.exports = "#map_canvas {\n  height: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFwL0M6XFxVc2Vyc1xcbWlyb2hva2FcXERlc2t0b3BcXEhhY2thdGhvbiBTb2x1dGlvbiBVSVxcRmFjdG9yeU9TL3NyY1xcYXBwXFxtYXBcXG1hcC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxhQUFZLEVBQ2YiLCJmaWxlIjoic3JjL2FwcC9tYXAvbWFwLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNtYXBfY2FudmFze1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG59Il19 */"
 
 /***/ }),
 
@@ -193,11 +193,11 @@ var MapPage = /** @class */ (function () {
                     lat: results[0].geometry.location.lat,
                     lng: results[0].geometry.location.lng
                 };
-                var marker = new google.maps.Marker({
-                    position: results[0].geometry.location,
-                    map: _this.map
-                });
-                _this.markers.push(marker);
+                // let marker = new google.maps.Marker({
+                //   position: results[0].geometry.location,
+                //   map: this.map
+                // });
+                // this.markers.push(marker);
                 _this.map.setCenter(results[0].geometry.location);
             }
         });
