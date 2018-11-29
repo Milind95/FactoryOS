@@ -13,17 +13,17 @@
   <ion-card>
     <ion-img src="/assets/factory.jpg"></ion-img>
     <ion-card-header>
-      <ion-card-title>Site Name</ion-card-title>
+      <ion-card-title>PlantOne</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>Site Information</p>
+      <p>Workline for Car Manufacturing, Chassis integration, Engine Assembly and Testing</p>
     </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-select placeholder="Select Workline" (ionChange)="workLineChange($event)">
-      <ion-select-option value="f">Workline 1</ion-select-option>
-      <ion-select-option value="m">Workline 2</ion-select-option>
+      <ion-select-option value="f">Car Manufacturing</ion-select-option>
+      <ion-select-option value="m">Bus Manufacturing</ion-select-option>
     </ion-select>
   </ion-card>
 
@@ -43,6 +43,16 @@
               <div style="border: 1px solid;height: auto;"></div>
               <ion-col>
                 Productivity
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <strong> 80%</strong>
+              </ion-col>
+              <div style="border: 1px solid;height: auto;"></div>
+              <ion-col>
+                <strong> 1 Car / Day</strong>
+
               </ion-col>
             </ion-row>
           </ion-grid>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BarcodeScanner,BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-line-kpi',
@@ -7,112 +9,92 @@ import { BarcodeScanner,BarcodeScannerOptions } from '@ionic-native/barcode-scan
   styleUrls: ['./line-kpi.page.scss'],
 })
 export class LineKPIPage implements OnInit {
-  options:BarcodeScannerOptions;
+  options: BarcodeScannerOptions;
   customActionSheetOptions: any = {
     header: 'Shift',
     subHeader: 'Select Shift'
   };
   subStages = [{
     'subStageId': 1,
-    'subStageName': 'Chassie Fitter',
+    'subStageName': 'Chassies Chase',
     'subStageEfficiency': 85,
     'machineList': [{
       'machineId': 12,
-      'machineName': 'Machine 1',
+      'machineName': 'SB011',
       'machineStatus': 'Completed',
       'machineEfficiency': '90%',
       'workerList': [{
-        'workerName': 'Sushant',
-        'workerEfficiency': '89%'
-      },
-      {
-        'workerName': 'Rakseh',
-        'workerEfficiency': '79%'
-      }]
+        'machineName': 'SB011',
+        'machineEfficiency': '90%',
+        'isMachine': true
+      }
+      ]
     },
     {
       'machineId': 14,
-      'machineName': 'Machine 2',
+      'machineName': 'SB012',
       'machineStatus': 'In-Progress',
       'machineEfficiency': '80%',
       'workerList': [{
-        'workerName': 'Ramesh',
-        'workerEfficiency': '52%'
+        'machineName': 'SB012',
+        'machineEfficiency': '80%',
+        'isMachine': true
       },
       {
         'workerName': 'Suresh',
-        'workerEfficiency': '67%'
+        'workerEfficiency': '67%',
+        'isMachine': false
       }]
     }]
   },
   {
     'subStageId': 2,
-    'subStageName': 'Window Fitter',
+    'subStageName': 'Engine Stage',
     'subStageEfficiency': 45,
     'machineList': [{
       'machineId': 16,
-      'machineName': 'Machine 3',
+      'machineName': 'SB013',
       'machineStatus': 'bottleNeck',
       'machineEfficiency': '25%',
       'workerList': [{
-        'workerName': 'Ram',
-        'workerEfficiency': '68%'
-      },
-      {
-        'workerName': 'Shyam',
-        'workerEfficiency': '59%'
-      }]
+        'machineName': 'SB013',
+        'machineEfficiency': '25%',
+        'isMachine': true
+      }
+      ]
     },
     {
       'machineId': 17,
-      'machineName': 'Machine 4',
+      'machineName': 'SB014',
       'machineStatus': 'Not-Started',
       'machineEfficiency': '78%',
       'workerList': [{
-        'workerName': 'Gautam',
-        'workerEfficiency': '76%'
+        'machineName': 'SB014',
+        'machineEfficiency': '78%',
+        'isMachine': true
       },
       {
         'workerName': 'Soham',
-        'workerEfficiency': '90%'
-      }]
-    }]
-  },
-  {
-    'subStageId': 3,
-    'subStageName': 'Car Painter',
-    'subStageEfficiency': 87,
-    'machineList': [{
-      'machineId': 19,
-      'machineName': 'Machine 5',
-      'machineStatus': 'Not-Started',
-      'machineEfficiency': '89%',
-      'workerList': [{
-        'workerName': 'Govind',
-        'workerEfficiency': '39%'
-      },
-      {
-        'workerName': 'John',
-        'workerEfficiency': '80%'
+        'workerEfficiency': '90%',
+        'isMachine': false
       }]
     },
-    {
-      'machineId': 14,
-      'machineName': 'Machine 6',
-      'machineStatus': 'Not-Started',
-      'machineEfficiency': '86%',
-      'workerList': [{
-        'workerName': 'Rohan',
-        'workerEfficiency': '48%'
-      },
       {
-        'workerName': 'Utkarsh',
-        'workerEfficiency': '78%'
-      }]
+      'machineId': 18,
+      'machineName': 'SB015',
+      'machineStatus': 'Not-Started',
+      'machineEfficiency': '88%',
+      'workerList': [{
+        'machineName': 'SB015',
+        'machineEfficiency': '88%',
+        'isMachine': true
+      }
+      ]
     }]
-  }];
+  },
+  ];
 
-  constructor(private barcodeScanner: BarcodeScanner) { }
+  constructor(private barcodeScanner: BarcodeScanner, public alertController: AlertController) { }
 
   ngOnInit() {
   }
@@ -125,15 +107,39 @@ export class LineKPIPage implements OnInit {
     }, 2000);
   }
 
-  showBarCode(){
+  showBarCode() {
     this.options = {
-      prompt:'Scan a barcode to see the result'
+      prompt: 'Scan a barcode to see the result'
     }
-    
+
     this.barcodeScanner.scan(this.options).then(barcodeData => {
       console.log('Barcode data', barcodeData);
-     }).catch(err => {
-         console.log('Error', err);
-     });
+      this.showModel();
+
+    }).catch(err => {
+      console.log('Error', err);
+    });
+
+  }
+
+  async showModel(): Promise<any> {
+    const alert = await this.alertController.create({
+      header: `Machine Data`,
+      message: `Efficiency is : <strong> 90 % </strong> <br>
+      Idle Time is : <strong> 1000 s </strong> <br>
+      Working Time is : <strong> 15000 s </strong> <br>`,
+      buttons: [
+        {
+          text: 'Okay',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

@@ -1,1 +1,36 @@
-<span class="worker" (click)="showWorkerInfo()"><ion-icon name="ios-man" size="large"></ion-icon></span>
+<!--<ion-row *ngIf="!workerInput.isMachine">
+    <ion-col>
+        <span  class="worker" (click)="showWorkerInfo()"><ion-icon name="ios-man" size="large"></ion-icon></span>
+    </ion-col>
+</ion-row>
+
+<ion-row *ngIf="!workerInput.isMachine">
+    <ion-col>
+        <ion-badge  color="primary">11 %</ion-badge>
+    </ion-col>
+</ion-row>
+
+
+<ion-row *ngIf="workerInput.isMachine">
+    <ion-col>
+        <span  class="worker" (click)="showWorkerInfo()"><ion-icon name="ios-man" size="large"></ion-icon></span>
+    </ion-col>
+</ion-row>
+
+<ion-row *ngIf="workerInput.isMachine">
+    <ion-col>
+       <ion-badge color="primary">11 %</ion-badge>
+    </ion-col>
+</ion-row>-->
+
+
+
+<span *ngIf="!workerInput.isMachine" class="worker" (click)="showWorkerInfo()"><ion-icon name="ios-man" size="large"></ion-icon>
+<span style="font-size: 65%;color: darkblue;">{{workerInput.workerEfficiency}}</span>
+<!--<ion-badge color="primary">11 %</ion-badge>-->
+</span>
+
+<span *ngIf="workerInput.isMachine" class="worker"><ion-icon name="cog" size="large"></ion-icon>
+<span style="font-size: 65%;color: darkblue;">{{workerInput.machineEfficiency}}</span>
+<!--<ion-badge color="primary">11 %</ion-badge>-->
+</span>

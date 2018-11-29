@@ -24,6 +24,11 @@ export class AppComponent {
       title: 'Analytics',
       url: '/analytics',
       icon: 'podium'
+    },
+    {
+      title: 'Logout',
+      url: '/login',
+      icon: 'log-out'
     }
   ];
 

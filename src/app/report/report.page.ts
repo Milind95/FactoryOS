@@ -8,30 +8,31 @@ import { AlertController } from '@ionic/angular';
 })
 export class ReportPage implements OnInit {
   rows = [{
-    "name": "Ramesh",
-    "efficiency": "90%",
+    "name": "John",
+    "efficiency": "78%",
     "action": "blank"
   },
   {
-    "name": "Ramesh",
-    "efficiency": "90%",
+    "name": "Max",
+    "efficiency": "89%",
     "action": "blank"
   },
   {
-    "name": "Ramesh",
-    "efficiency": "90%",
+    "name": "Jordan",
+    "efficiency": "72%",
     "action": "blank"
   },
   {
-    "name": "Ramesh",
-    "efficiency": "90%",
+    "name": "Vik",
+    "efficiency": "93%",
     "action": "blank"
   },
   {
-    "name": "Samesh",
-    "efficiency": "90%",
+    "name": "Bob",
+    "efficiency": "52%",
     "action": "Assign Training"
-  }];
+  }
+  ];
   tablestyle = 'bootstrap';
   loadingIndicator: boolean = true;
   reorderable: boolean = true;
@@ -47,7 +48,7 @@ export class ReportPage implements OnInit {
   }
 
   async assignTraining(allValue) {
-    	let name = allValue['name'];
+    let name = allValue['name'];
     console.log(allValue);
     const alert = await this.alertController.create({
       message: `Training assigned successfully to <strong style=""> ${name} </strong>`,

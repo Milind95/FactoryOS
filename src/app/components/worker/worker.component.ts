@@ -22,7 +22,7 @@ export class WorkerComponent implements OnInit {
       colorEff = 'red';
     } else if (workerEfficiencyNumber <= 80 && workerEfficiencyNumber > 51) {
       colorEff = 'yellow';
-    } else if (workerEfficiencyNumber <= 1000 && workerEfficiencyNumber > 81) {
+    } else if (workerEfficiencyNumber <= 100 && workerEfficiencyNumber > 81) {
       colorEff = 'green';
     }
 
@@ -46,5 +46,19 @@ export class WorkerComponent implements OnInit {
     });
 
     await alert.present();
+  }
+
+
+  returnColor(efficiency) {
+    let data = efficiency.split('%');
+    let efficiencyNumber = Number(data[0])
+
+    if (efficiencyNumber <= 50 && efficiencyNumber > 0) {
+      return 'red';
+    } else if (efficiencyNumber <= 80 && efficiencyNumber > 51) {
+      return 'yellow';
+    } else if (efficiencyNumber <= 100 && efficiencyNumber > 81) {
+      return 'green';
+    }
   }
 }
