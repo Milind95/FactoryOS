@@ -17,15 +17,15 @@ export class LineKPIPage implements OnInit {
   subStages = [{
     'subStageId': 1,
     'subStageName': 'Chassies Chase',
-    'subStageEfficiency': 85,
+    'subStageEfficiency': 88.35,
     'machineList': [{
       'machineId': 12,
       'machineName': 'SB011',
       'machineStatus': 'Completed',
-      'machineEfficiency': '90%',
+      'machineEfficiency': '93.62%',
       'workerList': [{
         'machineName': 'SB011',
-        'machineEfficiency': '90%',
+        'machineEfficiency': '93.62%',
         'isMachine': true
       }
       ]
@@ -34,15 +34,15 @@ export class LineKPIPage implements OnInit {
       'machineId': 14,
       'machineName': 'SB012',
       'machineStatus': 'In-Progress',
-      'machineEfficiency': '80%',
+      'machineEfficiency': '83%',
       'workerList': [{
         'machineName': 'SB012',
-        'machineEfficiency': '80%',
+        'machineEfficiency': '83%',
         'isMachine': true
       },
       {
         'workerName': 'Suresh',
-        'workerEfficiency': '67%',
+        'workerEfficiency': '86%',
         'isMachine': false
       }]
     }]
@@ -50,15 +50,15 @@ export class LineKPIPage implements OnInit {
   {
     'subStageId': 2,
     'subStageName': 'Engine Stage',
-    'subStageEfficiency': 45,
+    'subStageEfficiency': 45.35,
     'machineList': [{
       'machineId': 16,
       'machineName': 'SB013',
       'machineStatus': 'bottleNeck',
-      'machineEfficiency': '25%',
+      'machineEfficiency': '25.63%',
       'workerList': [{
         'machineName': 'SB013',
-        'machineEfficiency': '25%',
+        'machineEfficiency': '25.63%',
         'isMachine': true
       }
       ]
@@ -67,10 +67,10 @@ export class LineKPIPage implements OnInit {
       'machineId': 17,
       'machineName': 'SB014',
       'machineStatus': 'Not-Started',
-      'machineEfficiency': '78%',
+      'machineEfficiency': '66%',
       'workerList': [{
         'machineName': 'SB014',
-        'machineEfficiency': '78%',
+        'machineEfficiency': '66%',
         'isMachine': true
       },
       {
